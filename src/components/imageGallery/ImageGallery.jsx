@@ -1,7 +1,7 @@
 import css from './ImageGallery.module.scss';
 import ImageCard from "../imageCard/ImageCard";
 
-const ImageGallery = () => {
+const ImageGallery = ({images}) => {
 
     return (
         <ul className={css["image-gallery"]}>
