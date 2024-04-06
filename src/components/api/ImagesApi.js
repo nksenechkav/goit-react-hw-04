@@ -1,8 +1,11 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://api.unsplash.com";
-
 export const fetchImagesWithQuery = async query => {
-  const response = axios.get(`/photos/?client_id=HIfkJCCOjdGgAJ4ztyY-tfg0RhoVIp9eZ5GLEDchnWw=${query}`);
+  const response = await axios.get('https://api.unsplash.com/photos', {
+    params: { query: query },
+    headers: {
+      Authorization: 'Client-ID HIfkJCCOjdGgAJ4ztyY-tfg0RhoVIp9eZ5GLEDchnWw'
+    }
+  });
   return response.data;
 };

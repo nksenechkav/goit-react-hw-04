@@ -5,9 +5,18 @@ const ImageGallery = ({images}) => {
 
     return (
         <ul className={css["image-gallery"]}>
-            <li>
-                    <ImageCard/>
-                </li>
+             {images.map((image) => {
+                return (
+                    <li key={image.id}>
+                        <ImageCard
+                        id={image.id}
+                        src={image.user.profile_image}
+                        alt={image.description}
+                        likes={image.likes}
+                        />
+                    </li>
+                );
+            })}
         </ul>
 
     );

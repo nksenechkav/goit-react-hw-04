@@ -1,9 +1,10 @@
 import css from './ImageCard.module.scss';
 
-const ImageCard = () => {
+const ImageCard = ({src, alt, likes}) => {
     return (
       <div className={css["image-wrapper"]}>
-        <img className={css["image"]} src="" alt="" />
+        <img className={css["image"]} src={src} alt={alt} />
+        <p>likes:{likes}</p>
       </div>
     );
   };
