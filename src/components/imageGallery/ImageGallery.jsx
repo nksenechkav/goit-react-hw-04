@@ -10,9 +10,12 @@ const ImageGallery = ({images}) => {
                     <li key={image.id}>
                         <ImageCard
                         id={image.id}
-                        src={image.user.profile_image}
-                        alt={image.description}
+                        src={image.urls.small}
+                        modal={image.urls.regular}
+                        alt={image.alt_description}
+                        description={image.description}
                         likes={image.likes}
+                        author={image.user.name}
                         />
                     </li>
                 );

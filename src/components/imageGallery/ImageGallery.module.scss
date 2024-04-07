@@ -6,3 +6,15 @@
     justify-content: flex-start;
     align-items: center;
   }
+
+  li {
+    border: 1px solid black;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .li:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  }
+  
