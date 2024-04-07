@@ -1,8 +1,9 @@
 import css from './ImageGallery.module.scss';
 import ImageCard from "../imageCard/ImageCard";
 
-const ImageGallery = ({images}) => {
 
+const ImageGallery = ({images}) => {
+    
     return (
         <ul className={css["image-gallery"]}>
              {images.map((image) => {
@@ -23,5 +24,7 @@ const ImageGallery = ({images}) => {
         </ul>
 
     );
+    
   }
+  
   export default ImageGallery;

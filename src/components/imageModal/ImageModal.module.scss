@@ -1,0 +1,30 @@
+.modal-window {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border: none;
+      background: transparent;
+      width: 600px;
+      height: auto;
+      overflow: hidden;
+  }
+
+  .modal-image {
+    width: 600px;
+    height: auto;
+    overflow: hidden;
+  }
+
+  .modal-text {
+    display: flex;
+    flex-direction: column; 
+    text-align: center;
+    color: #333;
+  }
+  
+  .modal-element {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 10px 0;
+  }

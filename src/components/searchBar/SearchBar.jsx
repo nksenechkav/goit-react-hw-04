@@ -8,6 +8,7 @@ export const SearchBar = ({ onSearch }) => {
     evt.preventDefault();
     const form = evt.target;
 	  const query = form.elements.query.value;
+    
     if(form.elements.query.value.trim() === "") {
     alert("Please enter search term!")
     return;

@@ -1,17 +1,29 @@
 import css from './ImageCard.module.scss';
+import { useState } from 'react';
+import ImageModal from '../imageModal/ImageModal';
 
-const ImageCard = ({src, alt, likes, modal, description, author}) => {
+
+const ImageCard = ({src, alt, modal, description, likes, author}) => {
+  const [isOpen, setIsOpen] = useState(false);
+    
+
+    const openModal = () => {
+        setIsOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsOpen(false);
+    };
     return (
       <div className={css["image-wrapper"]}>
         <a href={modal} className={css["gallery-link"]}></a>
-        <img className={css["image"]} src={src} alt={alt} width="24"/>
+        <img className={css["image"]} src={src} alt={alt} width="24" onClick={openModal}/>
         <a/>
-        <div className={css["modal-text"]}> 
-              <div className={css["modal-elemet"]}><p>Likes</p><span>{likes}</span></div>
-              <div className={css["modal-elemet"]}><p>Description</p><span>{description}</span></div>
-              <div className={css["modal-elemet"]}><p>Author</p><span>{author}</span></div>
-        </div>
+        {isOpen && ( 
+        <ImageModal modal={modal} description={description} likes={likes} author={author} isOpen={isOpen} setOpen={setIsOpen} />
+      )}
       </div>
+     
     );
   };
   

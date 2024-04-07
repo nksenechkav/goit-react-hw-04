@@ -18,7 +18,6 @@ import './App.css'
         setError(false);
         setLoading(true);
         const data = await fetchImagesWithQuery(query);
-        console.log(data)
         setImages(data);
       } catch (error) {
         setError(true);
