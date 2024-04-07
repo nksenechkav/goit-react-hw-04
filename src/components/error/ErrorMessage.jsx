@@ -1,12 +1,12 @@
 import toast, { Toaster } from 'react-hot-toast';
 
+const notify = () => toast('Whoops, something went wrong! Please try reloading this page!');
+
 const ErrorMessage = () => {
-    return (
-        <Toaster notify = {() => toast('Whoops, something went wrong! Please try reloading this page!')}
-        position="top-center"
-        reverseOrder={false}
-      />
-    )
-  }
+  notify();
+  return (
+      <Toaster />
+  );
+};
 
 export default ErrorMessage;

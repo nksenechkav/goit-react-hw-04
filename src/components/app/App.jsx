@@ -4,8 +4,7 @@ import SearchBar from '../searchBar/SearchBar'
 import ImageGallery from '../imageGallery/ImageGallery'
 import { fetchImagesWithQuery } from '../api/ImagesApi';
 import ErrorMessage from '../error/ErrorMessage'
-
-
+import LoaderComponent from '../loader/LoaderComponent';
 import './App.css'
 
   function App() {
@@ -49,7 +48,7 @@ import './App.css'
   return (
     <div className='gallery-container'>
        <SearchBar onSearch={handleSearch}/>
-       {loading && <p>Loading data, please wait...</p>}
+       {loading && <LoaderComponent />}
       {error && <ErrorMessage />}
       {images.length > 0 && <ImageGallery images={images} />}
     </div>
