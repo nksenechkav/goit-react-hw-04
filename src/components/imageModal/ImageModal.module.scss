@@ -1,30 +1,37 @@
 .modal-window {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 10px;
       border: none;
       background: transparent;
-      width: 600px;
-      height: auto;
+      max-width: fit-content;
+      max-height: 600px;
       overflow: hidden;
   }
 
+
+
   .modal-image {
-    width: 600px;
-    height: auto;
-    overflow: hidden;
+     display: block;
+     max-width: fit-content;
+     max-height: 550px;
+     overflow: hidden;
   }
 
   .modal-text {
     display: flex;
-    flex-direction: column; 
+    flex-direction: row;
+    gap: 50px;
+    flex-wrap: nowrap; 
     text-align: center;
     color: #333;
+    font-weight: 400;
   }
   
   .modal-element {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    margin: 10px 0;
+        span {
+          font-weight: 700;
+        }
   }

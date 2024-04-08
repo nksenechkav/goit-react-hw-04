@@ -6,14 +6,10 @@ import ImageModal from '../imageModal/ImageModal';
 const ImageCard = ({src, alt, modal, description, likes, author}) => {
   const [isOpen, setIsOpen] = useState(false);
     
-
     const openModal = () => {
         setIsOpen(true);
     };
 
-    const closeModal = () => {
-        setIsOpen(false);
-    };
     return (
       <div className={css["image-wrapper"]}>
         <a href={modal} className={css["gallery-link"]}></a>
