@@ -26,8 +26,10 @@ import './App.css'
         setLoading(true);
         const data = await fetchImagesWithQuery(query, page);
         setImages(data.results);
+        // setTotalPages(data.total_pages);
+        console.log(data);
+        console.log(page);
         setShowBtn(data.total_pages && data.total_pages !== page);
-        console.log(data.total_pages)
       } catch (error) {
         setError(true);
       } finally {
@@ -44,10 +46,11 @@ import './App.css'
   
     const fetchImages = async () => {
       setLoading(true);
-      const data = await fetchImagesWithQuery(query, page);
+      const data = await fetchImagesWithQuery(query, page+1);
       setImages([...images, ...data.results]);
       setPage(page + 1);
-      setTotalPages(data.total_pages);
+      console.log(page);
+      // setTotalPages(data.total_pages);
       setShowBtn(data.total_pages && data.total_pages !== page);
       setLoading(false);
     };

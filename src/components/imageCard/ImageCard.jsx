@@ -2,7 +2,6 @@ import css from './ImageCard.module.scss';
 import { useState } from 'react';
 import ImageModal from '../imageModal/ImageModal';
 
-
 const ImageCard = ({src, alt, modal, description, likes, author}) => {
   const [isOpen, setIsOpen] = useState(false);
     

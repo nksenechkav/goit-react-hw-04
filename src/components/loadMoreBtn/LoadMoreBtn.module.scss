@@ -1,0 +1,14 @@
+.btn {
+    cursor: pointer;
+    border-radius: 4px;
+    border: 1px solid black;
+    font: inherit;
+    color: white;
+    padding: 5px 10px;
+    background-color: navy;
+  }
+  .btn:hover {
+    border: 1px solid black;
+    color: black;
+    background-color: gainsboro;
+  }

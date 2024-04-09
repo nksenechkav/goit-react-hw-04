@@ -10,13 +10,13 @@ const ImageGallery = ({images}) => {
                 return (
                     <li key={image.id}>
                         <ImageCard
-                        id={image.id}
-                        src={image.urls.small}
-                        modal={image.urls.regular}
-                        alt={image.alt_description}
-                        description={image.description}
-                        likes={image.likes}
-                        author={image.user.name}
+                        id={image.cover_photo.id}
+                        src={image.cover_photo.urls.small}
+                        modal={image.cover_photo.urls.regular}
+                        alt={image.cover_photo.alt_description}
+                        description={image.cover_photo.description}
+                        likes={image.cover_photo.likes}
+                        author={image.cover_photo.user.name}
                         />
                     </li>
                 );
