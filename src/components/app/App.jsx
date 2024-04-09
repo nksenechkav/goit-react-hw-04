@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useEffect } from 'react';
 import SearchBar from '../searchBar/SearchBar'
 import ImageGallery from '../imageGallery/ImageGallery'
-import { fetchImagesWithQuery } from '../api/ImagesApi';
+import { fetchImagesWithQuery } from '../api/images-api';
 import ErrorMessage from '../error/ErrorMessage'
 import LoaderComponent from '../loader/LoaderComponent';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn';
@@ -16,7 +16,6 @@ import './App.css'
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(null);
-    console.log (query);
 
 
     const handleSearch = async query => {
@@ -26,9 +25,9 @@ import './App.css'
         setError(false);
         setLoading(true);
         const data = await fetchImagesWithQuery(query, page);
-        setImages(data);
-        console.log(data)
+        setImages(data.results);
         setShowBtn(data.total_pages && data.total_pages !== page);
+        console.log(data.total_pages)
       } catch (error) {
         setError(true);
       } finally {
