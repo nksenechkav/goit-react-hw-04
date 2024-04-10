@@ -1,8 +1,6 @@
 import css from './ImageModal.module.scss';
 import Modal from 'react-modal';
 
-Modal.setAppElement(document.getElementById('root'));
-
 const customStyles = {
   content: {
     top: '50%',

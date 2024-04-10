@@ -1,5 +1,8 @@
 import css from './SearchBar.module.scss';
 import { BsSearch } from "react-icons/bs";
+import toast, { Toaster } from "react-hot-toast";
+
+const notify = () => toast('Please enter search term!');
   
   
 export const SearchBar = ({ onSearch }) => {
@@ -10,8 +13,8 @@ export const SearchBar = ({ onSearch }) => {
 	  const query = form.elements.query.value;
     
     if(form.elements.query.value.trim() === "") {
-    alert("Please enter search term!")
-    return;
+      notify();
+      return;
   }
     onSearch(query);
     form.reset();
@@ -30,6 +33,7 @@ export const SearchBar = ({ onSearch }) => {
                 placeholder="Search images and photos"
                 />
             </form>
+            <Toaster />
         </header>
     );
   }

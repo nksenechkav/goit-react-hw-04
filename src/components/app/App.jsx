@@ -6,7 +6,11 @@ import { fetchImagesWithQuery } from '../api/images-api';
 import ErrorMessage from '../error/ErrorMessage'
 import LoaderComponent from '../loader/LoaderComponent';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn';
+import ImageModal from '../imageModal/ImageModal';
+import Modal from "react-modal";
 import './App.css'
+
+Modal.setAppElement("#root");
 
   function App() {
     const [images, setImages] = useState([]);
@@ -14,59 +18,68 @@ import './App.css'
     const [error, setError] = useState(false);
     const [showBtn, setShowBtn] = useState(false);
     const [query, setQuery] = useState('');
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState(null);
     const [totalPages, setTotalPages] = useState(null);
 
+    useEffect(() => {
+      if (!query) return;
+    }, [query, page]);
 
-    const handleSearch = async query => {
+    const fetchData = async (query, page) => {
       try {
         setQuery(query);
         setImages([]);
         setError(false);
         setLoading(true);
+        setPage(1);
         const data = await fetchImagesWithQuery(query, page);
-        setImages(data.results);
-        // setTotalPages(data.total_pages);
-        console.log(data);
-        console.log(page);
+        if (data.results.length === 0) {
+          return;
+        }
+        setImages((images) => [...images, ...data.results]);
+        setTotalPages(data.total_pages);
+        console.log(data.total_pages);
         setShowBtn(data.total_pages && data.total_pages !== page);
-      } catch (error) {
+      }
+      catch (error) {
         setError(true);
+        console.log(error.message);
       } finally {
         setLoading(false);
       }
     };
 
 
-    useEffect(() => {
-      if (!query || page > totalPages) return;
-      fetchImages();
-    }, [query, page]);
   
-  
-    const fetchImages = async () => {
-      setLoading(true);
-      const data = await fetchImagesWithQuery(query, page+1);
-      setImages([...images, ...data.results]);
-      setPage(page + 1);
-      console.log(page);
-      // setTotalPages(data.total_pages);
-      setShowBtn(data.total_pages && data.total_pages !== page);
-      setLoading(false);
-    };
-  
+    const onLoadMore = async () => {
+      try {
+        setLoading(true);
+        setPage((page) => page + 1);
+        console.log(page);
+        const newData = await fetchImagesWithQuery(query, page+1);
+        setImages((prevImgs) => [...prevImgs, ...newData.results]);
+        setTotalPages(newData.total_pages);
+        setShowBtn(newData.total_pages && newData.total_pages !== page);
+      } catch (error) {
+        setError(true);
+        console.log(error.message);
+      }
+      finally {
+        setLoading(false);
+      }
+    }
 
-    const handleLoadMore = () => {
-      fetchImages();
-    };
-  
+    
+
   return (
     <div className='gallery-container'>
-       <SearchBar onSearch={handleSearch}/>
+       <SearchBar onSearch={fetchData}/>
        {loading && <LoaderComponent />}
        {error && <ErrorMessage />}
        {images.length > 0 && <ImageGallery images={images} />}
-       {showBtn && <LoadMoreBtn onClick={handleLoadMore} />}
+       <ImageModal/>
+       {showBtn && <LoadMoreBtn onLoadMore={onLoadMore} />} 
+      
     </div>
   )
 }
