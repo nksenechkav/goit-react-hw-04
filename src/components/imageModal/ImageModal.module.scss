@@ -1,36 +1,40 @@
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
 .modal-window {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      border: none;
-      background: transparent;
-      max-width: fit-content;
-      max-height: 600px;
-      overflow: hidden;
+    flex-grow: 1;
   }
 
-
-
   .modal-image {
-     display: block;
-     max-width: fit-content;
-     max-height: 550px;
-     overflow: hidden;
+    max-height: 600px;
+    overflow: hidden;
+  }
+
+  image {
+    max-width: 100%;
+    max-height: 100%;
   }
 
   .modal-text {
+    margin-top: auto;
+    min-height: 30px;
+    background-color: navy;
+    padding: 10px 20px;
     display: flex;
     flex-direction: row;
-    gap: 50px;
+    justify-content: space-between;
+    align-items: baseline;
     flex-wrap: nowrap; 
-    text-align: center;
-    color: #333;
+    color: white;
     font-weight: 400;
   }
   
   .modal-element {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; 
         span {
           font-weight: 700;
         }
