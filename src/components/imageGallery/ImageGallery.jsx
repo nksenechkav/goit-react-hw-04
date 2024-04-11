@@ -6,9 +6,9 @@ const ImageGallery = ({images}) => {
     
     return (
         <ul className={css["image-gallery"]}>
-             {images.map((image) => {
+             {images.map((image, index) => {
                 return (
-                    <li key={image.id}>
+                    <li key={`${image.id}-${index}`}>
                         <ImageCard image={image}/>
                     </li>
                 );

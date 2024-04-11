@@ -38,7 +38,6 @@ Modal.setAppElement("#root");
         }
         setImages((images) => [...images, ...data.results]);
         setTotalPages(data.total_pages);
-        console.log(data.total_pages);
         setShowBtn(data.total_pages && data.total_pages !== page);
       }
       catch (error) {
@@ -53,13 +52,13 @@ Modal.setAppElement("#root");
   
     const onLoadMore = async () => {
       try {
+        setPage((prevPage) => prevPage + 1);
         setLoading(true);
-        setPage((page) => page + 1);
-        console.log(page);
         const newData = await fetchImagesWithQuery(query, page+1);
         setImages((prevImgs) => [...prevImgs, ...newData.results]);
         setTotalPages(newData.total_pages);
-        setShowBtn(newData.total_pages && newData.total_pages !== page);
+        setShowBtn(newData.total_pages && newData.total_pages !== page+1);
+        
       } catch (error) {
         setError(true);
         console.log(error.message);
@@ -76,9 +75,9 @@ Modal.setAppElement("#root");
        <SearchBar onSearch={fetchData}/>
        {loading && <LoaderComponent />}
        {error && <ErrorMessage />}
-       {images.length > 0 && <ImageGallery images={images} />}
+       {images.length > 0 && <ImageGallery images={images}/>}
        <ImageModal/>
-       {showBtn && <LoadMoreBtn onLoadMore={onLoadMore} />} 
+       {showBtn && page < totalPages && <LoadMoreBtn onLoadMore={onLoadMore} />} 
       
     </div>
   )
