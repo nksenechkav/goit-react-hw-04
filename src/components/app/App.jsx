@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { useEffect } from 'react';
 import SearchBar from '../searchBar/SearchBar'
 import ImageGallery from '../imageGallery/ImageGallery'
@@ -22,6 +22,7 @@ import './App.css'
     const [totalPages, setTotalPages] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [modalContent, setModalContent] = useState({});
+    const loadMoreBtnRef = useRef(null);
 
 
     const onSubmit = (query) => {
@@ -57,7 +58,14 @@ import './App.css'
       }
       fetchImages();
     }, [query, page]);
-  
+
+
+    useEffect(() => {
+      if (loadMoreBtnRef.current) {
+        loadMoreBtnRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, [images]);
+    
 
     function openModal() {
       setIsOpen(true);
@@ -86,7 +94,7 @@ import './App.css'
         content={modalContent}
       />
        {showBtn && page < totalPages && <LoadMoreBtn onLoadMore={onLoadMore} />} 
-      
+       <div ref={loadMoreBtnRef} />
     </div>
   )
 }
