@@ -6,8 +6,10 @@ import { fetchImagesWithQuery } from '../api/images-api';
 import ErrorMessage from '../error/ErrorMessage'
 import LoaderComponent from '../loader/LoaderComponent';
 import LoadMoreBtn from '../loadMoreBtn/LoadMoreBtn';
+import ImageModal from '../imageModal/ImageModal';
 
 import './App.css'
+
 
 
   function App() {
@@ -18,6 +20,9 @@ import './App.css'
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(null);
     const [totalPages, setTotalPages] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({});
+
 
     const onSubmit = (query) => {
        setImages([]);
@@ -54,12 +59,32 @@ import './App.css'
     }, [query, page]);
   
 
+    function openModal() {
+      setIsOpen(true);
+    }
+  
+    function closeModal() {
+      setModalContent({});
+      setIsOpen(false);
+    }
+
+    function clickOpenModal(content) {
+      setModalContent(content);
+      openModal();
+    }
+  
+
   return (
     <div className='gallery-container'>
        <SearchBar onSearch={onSubmit}/>
        {loading && <LoaderComponent />}
        {error && <ErrorMessage />}
-       {images.length > 0 && <ImageGallery images={images}/>}
+       {images.length > 0 && <ImageGallery images={images} onImgClick={clickOpenModal} />}
+       <ImageModal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        content={modalContent}
+      />
        {showBtn && page < totalPages && <LoadMoreBtn onLoadMore={onLoadMore} />} 
       
     </div>

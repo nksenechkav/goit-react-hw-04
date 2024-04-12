@@ -1,21 +1,22 @@
 import css from './ImageCard.module.scss';
-import { useState } from 'react';
-import ImageModal from '../imageModal/ImageModal';
 
+const ImageCard = ({image: {urls, alt_description, likes, author}, onImgClick}) => {
+ 
+  function handleClick() {
 
-const ImageCard = ({image: {urls, description, likes, author}}) => {
-  const [isOpen, setIsOpen] = useState(false);
+    const content = {
+      modal: urls.regular,
+      likes,
+      alt_description,
+      author,
+    };
 
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
+    onImgClick(content);
+  }
+  
     return (
       <div className={css["image-wrapper"]}>
-        <img className={css["image"]} src={urls.small} alt={description} onClick={openModal}/>
-        {isOpen && (
-        <ImageModal modal={urls.regular} description={description} likes={likes} author={author} isOpen={isOpen} setOpen={setIsOpen}/>
-       )}
+        <img className={css["image"]} src={urls.small} alt={alt_description} onClick={handleClick}/>
       </div>
  
     );

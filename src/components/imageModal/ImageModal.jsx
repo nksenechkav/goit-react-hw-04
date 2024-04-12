@@ -33,20 +33,21 @@ const customStyles = {
   },
 };
 
-const ImageModal = ({ modal, description, likes, author, isOpen, setOpen }) => {
+const ImageModal = ({ content: { modal, alt_description, likes, author}, isOpen, onRequestClose }) => {
   
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={() => setOpen(false)}
+      onRequestClose={() => onRequestClose()}
+      shouldCloseOnOverlayClick={true}
       style={customStyles}> 
       <div className={css["modal-window"]}>
         <div className={css["modal-image"]}>
-        <img src={modal} alt={description}/>
+        <img src={modal} alt={alt_description}/>
         </div>
             <div className={css["modal-text"]}> 
                     <div className={css["modal-element"]}><p><AiTwotoneLike /></p><span>{likes}</span></div>
-                    <div className={css["modal-element"]}><span>{description}</span></div>
+                    <div className={css["modal-element"]}><span>{alt_description}</span></div>
                     <div className={css["modal-element"]}><span>{author}</span></div>
             </div>
       </div>
